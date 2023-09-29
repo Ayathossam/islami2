@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami/core/theme/application_theme.dart';
 import 'package:islami/layout/home.dart';
+import 'package:islami/moduls/hadeth/hadeth_details_view.dart';
 import 'package:islami/moduls/quran/widget/quran_details_view.dart';
 import 'package:islami/moduls/splash_screen/splash_screen.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (context) => SplashScreen(),
         HomeLayout.routeName: (context) => HomeLayout(),
         QuranDetails.routeName: (context) => QuranDetails(),
+        HadethDetails.routeName: (context) => HadethDetails(),
       }, // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
