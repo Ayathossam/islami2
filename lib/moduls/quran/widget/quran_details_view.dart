@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:islami/moduls/quran/quran_view.dart';
 
-class QuranDetails extends StatelessWidget {
+class QuranDetails extends StatefulWidget {
   static const String routeName = "Quran_Details";
 
-  const QuranDetails({super.key});
+  QuranDetails({super.key});
+
+  @override
+  State<QuranDetails> createState() => _QuranDetailsState();
+}
+
+class _QuranDetailsState extends State<QuranDetails> {
+  String content = '';
+  List<String> allVerses = [];
 
   @override
   Widget build(BuildContext context) {
+    var args = ModalRoute.of(context)?.settings.arguments as SuraDetails;
+    if (content.isEmpty) readFiles(args.suraNumber);
+    readFiles(args.suraNumber);
+
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     return Container(
@@ -34,7 +48,8 @@ class QuranDetails extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("hgfy", style: theme.textTheme.bodyLarge),
+                  Text(" سورة ${args.suraName}",
+                      style: theme.textTheme.bodyLarge),
                   SizedBox(
                     width: 4,
                   ),
@@ -52,14 +67,28 @@ class QuranDetails extends StatelessWidget {
                 thickness: 1.2,
                 height: 10,
               ),
-              Text(
-                'HUGFRYFYHKUFYR',
-                style: theme.textTheme.bodySmall,
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) => Text(
+                    content,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodySmall,
+                  ),
+                  itemCount: 1,
+                ),
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  readFiles(String i) async {
+    String text = await rootBundle.loadString('assets/files/$i.txt');
+    content = text;
+    setState(() {
+      allVerses = content.split("\n");
+    });
   }
 }
