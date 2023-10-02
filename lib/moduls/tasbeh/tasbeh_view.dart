@@ -99,7 +99,7 @@ class _TasbehViewState extends State<TasbehView> {
     if (counter == 30) {
       counter = 0;
       curIndex++;
-      if (curIndex < 3) {
+      if (curIndex > 3) {
         curIndex = 0;
       }
     }
