@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ApplicationTheme {
   static ThemeData lightTheme = ThemeData(
+    highlightColor: Colors.transparent,
     primaryColor: Color(0xFFB7935F),
     scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: AppBarTheme(

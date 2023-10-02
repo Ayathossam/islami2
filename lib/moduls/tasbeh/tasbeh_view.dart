@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 
-class TasbehView extends StatelessWidget {
-  const TasbehView({super.key});
+class TasbehView extends StatefulWidget {
+  TasbehView({super.key});
+
+  @override
+  State<TasbehView> createState() => _TasbehViewState();
+}
+
+class _TasbehViewState extends State<TasbehView> {
+  double angle = 0;
+  int curIndex = 0;
+  int counter = 0;
+  List<String> azkar = [
+    'سبحان الله',
+    'الحمد لله',
+    'لا إله إلا الله',
+    'الله أكبر'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +38,19 @@ class TasbehView extends StatelessWidget {
                   height: mediaQuery.height * 0.10,
                 )),
             Container(
+                decoration: BoxDecoration(color: theme.highlightColor),
                 margin: EdgeInsets.only(top: mediaQuery.height * 0.09),
-                child: Image.asset(
-                  'assets/images/img_2.png',
-                  height: mediaQuery.height * 0.20,
+                child: Transform.rotate(
+                  angle: angle,
+                  child: InkWell(
+                    onTap: () {
+                      clickOnImage();
+                    },
+                    child: Image.asset(
+                      'assets/images/img_2.png',
+                      height: mediaQuery.height * 0.20,
+                    ),
+                  ),
                 )),
           ],
         ),
@@ -49,7 +73,7 @@ class TasbehView extends StatelessWidget {
             borderRadius: BorderRadius.circular(22),
             color: Color(0xFFB7935F),
           ),
-          child: Text("30", style: theme.textTheme.bodyLarge),
+          child: Text("$counter", style: theme.textTheme.bodyLarge),
         ),
         SizedBox(
           height: 40,
@@ -62,9 +86,23 @@ class TasbehView extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             color: Color(0xFFB7935F),
           ),
-          child: Text("سبحان الله", style: theme.textTheme.bodyMedium),
+          child: Text(azkar[curIndex], style: theme.textTheme.bodyMedium),
         ),
       ],
     );
+  }
+
+  void clickOnImage() {
+    angle += 5;
+    counter++;
+
+    if (counter == 30) {
+      counter = 0;
+      curIndex++;
+      if (curIndex < 3) {
+        curIndex = 0;
+      }
+    }
+    setState(() {});
   }
 }
